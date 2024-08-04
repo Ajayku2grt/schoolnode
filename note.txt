@@ -1,0 +1,29 @@
+1.   npm init
+2.  create .gitignore
+
+3. server.js
+
+4.. install express
+
+5. npm i -D nodemon
+
+6.  setup script in package.json
+start and dev
+
+7.  npm run dev
+8. setup server.js 
+
+9. setup .env file and install dotenv package
+10 alternate of postman of vsc is thunderclient
+
+11. setup routes folder
+12. setup controller
+13. setup error handler
+
+14. setup constant
+15. async handler install
+
+16. mongo username: admin,   password:   slFdC63Zgls9woDu, from online website of mongo cloud free version shared version,  
+17. npm install mongoose
+18. connect mongo toh vscode clicnt 
+19
