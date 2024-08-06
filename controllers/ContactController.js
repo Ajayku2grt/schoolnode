@@ -1,7 +1,9 @@
 const asyncHandler = require("express-async-handler");
+const Contact = require("../models/contactModels")
 
 const getContact = asyncHandler( async (req, res) => {
-  res.status(200).json( {message : 'from controller'} );  
+    const contacts = await Contact.find();
+    res.status(200).json(contacts );  
 });
 
 const createContact = asyncHandler( async (req, res) => {
@@ -10,19 +12,42 @@ const createContact = asyncHandler( async (req, res) => {
         res.status(422);
         throw new Error("All fields are mandatory!");
     }
-    res.status(200).json( {message : 'from create'} );
+    const contact = await Contact.create({
+        name,
+        email,
+        mobile
+    });
+    res.status(200).json( {message : 'Contact Created successful'} );
 });
 
 const editContact = asyncHandler( async (req, res) => {
-    res.status(200).json({message : `from edit ${req.params.id}`} );
+    const contact = await Contact.findById(req.params.id);
+    if(!contact){
+        res.status(422).json({status: false, message:'No Data Found'});
+    }
+    res.status(200).json({list: contact, message : 'Fetch Succesfully'} );
 });
 
 const updateContact = asyncHandler( async (req, res) => {
-    res.status(200).json( {message : `from put ${req.params.id}`} );
+    const contact = await Contact.findById(req.params.id);
+    if(!contact){
+        res.status(422).json({status: false, message:'No Data Found'});
+    }
+    const updatedContact = await Contact.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new:true }
+    );
+    res.status(200).json( {updatedContact:updatedContact, message : 'Updated Succesfully'} );
 });
 
 const deleteContact = asyncHandler( async (req, res) => {
-    res.status(200).json( {message : `from delete ${req.params.id}`} );
+    const contact = await Contact.findById(req.params.id);
+    if(!contact){
+        res.status(422).json({status: false, message:'No Data Found'});
+    }
+    await Contact.deleteOne();
+    res.status(200).json( {message : `Delete Sucessfully`} );
 });
 
 
