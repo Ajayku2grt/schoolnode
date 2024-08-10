@@ -26,4 +26,4 @@ start and dev
 16. mongo username: admin,   password:   slFdC63Zgls9woDu, from online website of mongo cloud free version shared version,  
 17. npm install mongoose
 18. connect mongo toh vscode clicnt 
-19
+19    npm i jsonwebtoken

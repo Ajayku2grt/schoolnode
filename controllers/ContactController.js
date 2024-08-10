@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 const Contact = require("../models/contactModels")
 
 const getContact = asyncHandler( async (req, res) => {
-    const contacts = await Contact.find();
+    const contacts = await Contact.find({user_id : req.user.id});
     res.status(200).json(contacts );  
 });
 
@@ -13,6 +13,7 @@ const createContact = asyncHandler( async (req, res) => {
         throw new Error("All fields are mandatory!");
     }
     const contact = await Contact.create({
+        user_id: req.user.id,
         name,
         email,
         mobile
@@ -21,7 +22,8 @@ const createContact = asyncHandler( async (req, res) => {
 });
 
 const editContact = asyncHandler( async (req, res) => {
-    const contact = await Contact.findById(req.params.id);
+    console.log(req.user.id);
+    const contact = await Contact.findById({ _id : req.params.id, user_id:req.user.id });
     if(!contact){
         res.status(422).json({status: false, message:'No Data Found'});
     }
@@ -29,7 +31,7 @@ const editContact = asyncHandler( async (req, res) => {
 });
 
 const updateContact = asyncHandler( async (req, res) => {
-    const contact = await Contact.findById(req.params.id);
+    const contact = await Contact.findById({ _id : req.params.id, user_id:req.user.id });
     if(!contact){
         res.status(422).json({status: false, message:'No Data Found'});
     }
@@ -42,11 +44,12 @@ const updateContact = asyncHandler( async (req, res) => {
 });
 
 const deleteContact = asyncHandler( async (req, res) => {
-    const contact = await Contact.findById(req.params.id);
+    const contact = await Contact.findById({ _id : req.params.id, user_id:req.user.id });
     if(!contact){
         res.status(422).json({status: false, message:'No Data Found'});
     }
-    await Contact.deleteOne();
+    console.log(contact);
+    await Contact.deleteOne({ _id : req.params.id, user_id:req.user.id });
     res.status(200).json( {message : `Delete Sucessfully`} );
 });
 
