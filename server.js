@@ -2,6 +2,8 @@ const express =  require('express');
 const errorHandler = require('./middleware/errorHandler');
 const connectDB = require('./config/dbConnect');
 const dotenv  = require('dotenv').config();
+// require('./schedular1');
+// require('./schedular2');
 
 connectDB(); //databse
 const app = express();

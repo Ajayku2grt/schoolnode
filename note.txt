@@ -23,7 +23,8 @@ start and dev
 14. setup constant
 15. async handler install
 
-16. mongo username: admin,   password:   slFdC63Zgls9woDu, from online website of mongo cloud free version shared version,  
+16. mongo from online website of mongo cloud free version shared version,  
 17. npm install mongoose
 18. connect mongo toh vscode clicnt 
 19    npm i jsonwebtoken
+20. installing node cron for cron jobs
