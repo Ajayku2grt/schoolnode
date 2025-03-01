@@ -1,0 +1,37 @@
+
+2. Contact Module Extensions
+Import/Export Contacts:
+Allow users to upload a CSV/Excel file to bulk import contacts.
+Add functionality to export contacts in CSV, Excel, or PDF format.
+Advanced Search & Filtering:
+Add filters for searching contacts by name, email, phone number, or tags.
+Contact Sharing:
+Implement a feature to share contacts between users with a unique shareable link.
+Groups or Categories:
+Allow users to organize contacts into groups (e.g., family, work, friends).
+Contact Notes:
+Add a section to store additional notes or comments for each contact.
+
+
+
+
+3. User Profile Extensions
+Profile Pictures:
+Allow users to upload a profile picture.
+Activity Log:
+Add an activity history feature to track user actions (e.g., login attempts, changes made to contacts).
+Password Management:
+Add a "Forgot Password" and "Change Password" feature.
+Notification Settings:
+Allow users to enable/disable notifications for specific actions.
+
+
+
+
+10. Deployment
+Dockerize the Project:
+Create a Docker setup for easier deployment.
+CI/CD Pipeline:
+Add CI/CD for automated testing and deployment.
+Cloud Hosting:
+Deploy your application to a cloud platform like AWS, Heroku, or Vercel.

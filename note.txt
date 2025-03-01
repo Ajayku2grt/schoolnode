@@ -28,3 +28,7 @@ start and dev
 18. connect mongo toh vscode clicnt 
 19    npm i jsonwebtoken
 20. installing node cron for cron jobs
+
+21. to imort excel install npm i xlsx
+
+22. npm install multer   to handle file

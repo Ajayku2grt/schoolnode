@@ -1,5 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Contact = require("../models/contactModels")
+const XLSX = require("xlsx");
+const fs = require('fs');
 
 const getContact = asyncHandler( async (req, res) => {
     const contacts = await Contact.find({user_id : req.user.id});
@@ -53,5 +55,40 @@ const deleteContact = asyncHandler( async (req, res) => {
     res.status(200).json( {message : `Delete Sucessfully`} );
 });
 
+const importContact = asyncHandler( async (req, res ) => {
+    if (!req.file) {
+        return res.status(400).json({ message: "No file uploaded" });
+    }
 
-module.exports = { getContact, createContact, editContact, updateContact, deleteContact };
+    const filePath = req.file.path;
+    const workbook = XLSX.readFile(filePath);
+    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const data = XLSX.utils.sheet_to_json(sheet);
+
+
+    const contacts = data.map(row => ({  //create a new object
+        user_id: req.user.id, 
+        name: row.Name,
+        email: row.Email,
+        mobile: row.Mobile
+      }));
+      await Contact.insertMany(contacts);
+      fs.unlinkSync(filePath);
+    
+      res.status(200).json({ message: 'Contacts imported successfully' });
+
+});
+
+
+const exportContact = asyncHandler ( async (req, res) => {
+
+    const contacts =  await Contact.find({user_id: req.user.id});
+
+    console.log(contacts);
+
+    res.status(200).json({ message: 'Contacts exported successfully' });
+
+});
+
+
+module.exports = { getContact, createContact, editContact, updateContact, deleteContact, importContact,exportContact };
